@@ -1,22 +1,22 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { InMemoryCheckInsRepository } from '@/repositories/in-memory/in-memory-check-ins-repository'
-import { CheckInCase } from './check-In'
 import { InMemoryGymsRepository } from '@/repositories/in-memory/in-memory-gyms-repository'
 import { MaxNumberOfCheckInsError } from './errors/max-number-of-check-ins-error'
 import { MaxDistanceError } from './errors/max-distance-error'
+import { CheckInUseCase } from './check-In'
 
 // TODO: usar o nome do caso de uso do test com sut, isso é um pattern em testes
 // sut ? system under test
 
 let checkInRepository: InMemoryCheckInsRepository
 let gymsRepository: InMemoryGymsRepository
-let sut: CheckInCase
+let sut: CheckInUseCase
 
 describe('Get user profile Use Case', () => {
   beforeEach(async () => {
     checkInRepository = new InMemoryCheckInsRepository()
     gymsRepository = new InMemoryGymsRepository()
-    sut = new CheckInCase(checkInRepository, gymsRepository)
+    sut = new CheckInUseCase(checkInRepository, gymsRepository)
 
     await gymsRepository.create({
       id: 'gym-1',
